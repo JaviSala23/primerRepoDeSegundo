@@ -1,0 +1,55 @@
+import requests
+from bs4 import BeautifulSoup
+import time
+a=True
+while a:
+    # URL del sitio web que deseas analizar
+    url = 'https://www.bna.com.ar'
+
+    respuesta= requests.get(url)
+    contenidoHTML=respuesta.content
+
+    soup = BeautifulSoup(contenidoHTML, 'html.parser')
+
+    cuerpo=soup.body
+
+    lista=['billetes','divisas']
+
+    for moneda in lista:
+        cotizacion=cuerpo.find(id=moneda)
+
+        print(moneda)
+
+        fecha=cotizacion.find(class_="fechaCot")
+        print(fecha.text)
+
+        monedas=cotizacion.tbody
+
+        filas = cotizacion.tbody.find_all('tr')
+
+        # Iterar a través de cada fila y obtener los elementos <td>
+        '''
+        for fila in filas:
+            celdas = fila.find_all('td')
+            if len(celdas) >= 3:
+                moneda = celdas[0].text.strip()
+                compra = celdas[1].text.strip()
+                venta = celdas[2].text.strip()
+                if moneda=="Dolar U.S.A":
+                    print("Moneda:", moneda)
+                    print("Compra:", compra)
+                    print("Venta:", venta)
+                    print("--------------------")
+        '''
+        celdas =filas[0].find_all('td')
+        if len(celdas) >= 3:
+                moneda = celdas[0].text.strip()
+                compra = celdas[1].text.strip()
+                venta = celdas[2].text.strip()
+                
+                print("Moneda:", moneda)
+                print("Compra:", compra)
+                print("Venta:", venta)
+                print("--------------------")
+                
+    time.sleep(3600)
