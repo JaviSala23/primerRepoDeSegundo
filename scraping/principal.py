@@ -4,8 +4,6 @@ import sqlite3
 from modelos import * 
 import funciones
 
-
-
 bd=BaseDatos()
 bd.generarTablas()
 
