@@ -87,7 +87,7 @@ class BaseDatos():
         ultimaFecha=self.consultar(f"""
                             SELECT id FROM fecha ORDER BY id DESC
                         """,1)
-        print(ultimaFecha)
+        
         
         return ultimaFecha
     
