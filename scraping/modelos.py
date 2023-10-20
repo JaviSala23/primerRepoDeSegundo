@@ -1,7 +1,5 @@
 import sqlite3
 
-
-
 class BaseDatos():
     def __init__(self):
         self.bd="BaseQuinela.sqlite" 
